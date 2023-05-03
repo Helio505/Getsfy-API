@@ -1,0 +1,5 @@
+/node_modules
+.env
+/stuff
+types.ts
+yarn.lock
