@@ -1,3 +1,5 @@
+import { checkAuthMiddleware } from "./middlewares/auth"
+
 require("dotenv/config")
 const express = require("express")
 const mongoose = require("mongoose")
@@ -26,7 +28,7 @@ mongoose.connect(server).then(() => {
 app.use(express.json())
 app.use("/auth", authRoutes)
 app.use("/users", userRoutes)
-app.use("/workspaces", workspaceRoutes)
+app.use("/workspaces", checkAuthMiddleware, workspaceRoutes)
 app.use("/tasks", taskRoutes)
 app.use("/subtasks", subtaskRoutes)
 

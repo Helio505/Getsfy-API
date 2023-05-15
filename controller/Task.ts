@@ -13,7 +13,7 @@ export async function createTask(req: Request, res: Response) {
     status,
     dueDate,
     assignee,
-    workspace,
+    workspaceId,
     project,
     tags,
   } = req.body;
@@ -42,8 +42,8 @@ export async function createTask(req: Request, res: Response) {
   if (!assignee) {
     return res.status(203).send("Assignee can't be null.");
   }
-  if (!workspace) {
-    return res.status(203).send("Workspace can't be null.");
+  if (!workspaceId) {
+    return res.status(203).send("WorkspaceId can't be null.");
   }
   if (!project) {
     return res.status(203).send("Project can't be null.");
@@ -67,7 +67,7 @@ export async function createTask(req: Request, res: Response) {
     status,
     dueDate,
     assignee,
-    workspace,
+    workspaceId,
     project,
     tags,
   });

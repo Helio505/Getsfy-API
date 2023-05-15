@@ -1,0 +1,57 @@
+Arguments: 
+  /Users/ricardo/.nvm/versions/node/v19.8.1/bin/node /Users/ricardo/.nvm/versions/node/v19.8.1/bin/yarn
+
+PATH: 
+  /Users/ricardo/.gem/bin:/Users/ricardo/.nvm/versions/node/v19.8.1/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/Library/Frameworks/Python.framework/Versions/3.10/bin:/Library/Frameworks/Python.framework/Versions/3.11/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/VMware Fusion.app/Contents/Public:/Library/Apple/usr/bin:/Users/ricardo/.gem/bin:/Users/ricardo/.nvm/versions/node/v19.8.1/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/Library/Frameworks/Python.framework/Versions/3.10/bin:/Library/Frameworks/Python.framework/Versions/3.11/bin:/Users/ricardo/flutter/bin:/Users/ricardo/.rvm/bin:/Users/ricardo/Getsfy-API/flutter/bin:/Users/ricardo/Getsfy-API/flutter/bin
+
+Yarn version: 
+  1.22.19
+
+Node version: 
+  19.8.1
+
+Platform: 
+  darwin arm64
+
+Trace: 
+  Error: https://registry.yarnpkg.com/mongoose: ESOCKETTIMEDOUT
+      at ClientRequest.<anonymous> (/Users/ricardo/.nvm/versions/node/v19.8.1/lib/node_modules/yarn/lib/cli.js:141517:19)
+      at Object.onceWrapper (node:events:626:28)
+      at ClientRequest.emit (node:events:512:28)
+      at TLSSocket.emitRequestTimeout (node:_http_client:840:9)
+      at Object.onceWrapper (node:events:626:28)
+      at TLSSocket.emit (node:events:524:35)
+      at Socket._onTimeout (node:net:580:8)
+      at listOnTimeout (node:internal/timers:573:17)
+      at process.processTimers (node:internal/timers:514:7)
+
+npm manifest: 
+  {
+    "name": "gestfy-api",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "type": "commonjs",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "start": "ts-node-dev .\\server.ts"
+    },
+    "author": "Helio",
+    "dependencies": {
+      "@types/express": "^4.17.17",
+      "@types/node": "^18.15.13",
+      "ts-node-dev": "^2.0.0",
+      "dotenv": "^16.0.3",
+      "express": "^4.18.2",
+      "mongoose": "^7.0.4"
+    },
+    "devDependencies": {
+      "typescript": "^5.0.4"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
