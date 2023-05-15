@@ -3,10 +3,10 @@ const router = express.Router();
 
 import { 
     createUser,
-    loginUser
+    login
 } from "../controller/Auth";
 
 router.post("/register", createUser);
-router.post("/login", loginUser);
+router.post("/login", login);
 
 module.exports = router;
