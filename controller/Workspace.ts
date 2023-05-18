@@ -138,6 +138,7 @@ export async function deleteAllWorkspaces(req: any, res: any) {
 export async function addMemberToWorkspace(req: any, res: Response) {
   const userId = req.userId;
   const memberToAddId = req.body.memberId;
+  const workspaceId = req.params.workspaceId;
 
   const isUserIdValid = mongoose.Types.ObjectId.isValid(userId);
   const isMemberToAddIdValid = mongoose.Types.ObjectId.isValid(memberToAddId);
@@ -149,7 +150,7 @@ export async function addMemberToWorkspace(req: any, res: Response) {
   }
 
   try {
-    const workspace = await Workspace.findOne({ _id: req.params.workspaceId });
+    const workspace = await Workspace.findOne({ _id: workspaceId })
 
     if (!workspace) {
       return res.status(404).send("O workspace não foi encontrado.");
