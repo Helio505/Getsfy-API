@@ -15,19 +15,9 @@ const taskSchema = new mongoose.Schema(
     workspaceId: {
       type: mongoose.Types.ObjectId,
     },
-    type: {
-      type: String,
-      enum: ["Project", "Task"],
-    },
-    id: {
-      type: String,
-    },
     priority: {
       type: String,
       enum: ["High", "Medium", "Low"],
-    },
-    team: {
-      type: String,
     },
     status: {
       type: String,
@@ -37,12 +27,6 @@ const taskSchema = new mongoose.Schema(
       type: String,
     },
     assignee: {
-      type: String,
-    },
-    workspace: {
-      type: String,
-    },
-    project: {
       type: String,
     },
     tags: {

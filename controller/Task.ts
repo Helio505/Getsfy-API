@@ -3,78 +3,34 @@ import { Request, Response } from "express";
 import Task from "../model/Task";
 import mongoose from "mongoose";
 
-export async function createTask(req: Request, res: Response) {
-  const {
-    description,
-    type,
-    id,
-    priority,
-    team,
-    status,
-    dueDate,
-    assignee,
-    workspaceId,
-    project,
-    tags,
-  } = req.body;
+export async function createTask(req: any, res: Response) {
+  const { description, priority, workspaceId } = req.body;
+
+  const userId = req.userId;
 
   if (!description) {
     return res.status(203).send("Description can't be null.");
   }
-  if (!type) {
-    return res.status(203).send("Type can't be null.");
-  }
-  if (!id) {
-    return res.status(203).send("ID can't be null.");
-  }
+
   if (!priority) {
     return res.status(203).send("Priority can't be null.");
   }
-  if (!team) {
-    return res.status(203).send("Team can't be null.");
-  }
-  if (!status) {
-    return res.status(203).send("Status can't be null.");
-  }
-  if (!dueDate) {
-    return res.status(203).send("Due date can't be null.");
-  }
-  if (!assignee) {
-    return res.status(203).send("Assignee can't be null.");
-  }
+
   if (!workspaceId) {
     return res.status(203).send("WorkspaceId can't be null.");
-  }
-  if (!project) {
-    return res.status(203).send("Project can't be null.");
-  }
-  if (!tags) {
-    return res.status(203).send("Tags can't be null.");
-  }
-
-  // Validando type:
-  const possible = ["Project", "Task"];
-  if (!possible.includes(type)) {
-    return res.status(203).send("Invalid type.");
   }
 
   const task = await new Task({
     description,
-    type,
-    id,
     priority,
-    team,
-    status,
-    dueDate,
-    assignee,
+    status: "To Do",
     workspaceId,
-    project,
-    tags,
+    creatorId: userId,
   });
 
   await task.save();
 
-  return res.status(200).send("Success, task created.");
+  return res.status(200).json(task);
 }
 
 export async function getTaskById(req: Request, res: Response) {
@@ -93,6 +49,38 @@ export async function getTaskById(req: Request, res: Response) {
   }
 
   return res.status(200).json(taskById);
+}
+
+export async function getTaskByWorkspaceId(req: Request, res: Response) {
+  const workspaceId = req.params.workspaceId;
+
+  const isIdValid = mongoose.Types.ObjectId.isValid(workspaceId);
+  if (!isIdValid) {
+    return res.status(203).send("Invalid mongodb objectid.");
+  }
+
+  const tasksByWorkspaceId = await Task.find({ workspaceId }).lean();
+  if (!tasksByWorkspaceId) {
+    return res.status(203).send("There's no task with this id.");
+  }
+
+  return res.status(200).json(tasksByWorkspaceId);
+}
+
+export async function getTaskByUserId(req: any, res: Response) {
+  const userId = req.userId;
+
+  const isIdValid = mongoose.Types.ObjectId.isValid(userId);
+  if (!isIdValid) {
+    return res.status(203).send("Invalid mongodb objectid.");
+  }
+
+  const tasksByWorkspaceId = await Task.find({ creatorId: userId }).lean();
+  if (!tasksByWorkspaceId) {
+    return res.status(203).send("There's no task with this id.");
+  }
+
+  return res.status(200).json(tasksByWorkspaceId);
 }
 
 export async function updateTaskById(req: Request, res: Response) {

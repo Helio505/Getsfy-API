@@ -29,7 +29,7 @@ app.use(express.json())
 app.use("/auth", authRoutes)
 app.use("/users", userRoutes)
 app.use("/workspaces", checkAuthMiddleware, workspaceRoutes)
-app.use("/tasks", taskRoutes)
+app.use("/tasks", checkAuthMiddleware, taskRoutes)
 app.use("/subtasks", subtaskRoutes)
 
 // Start server listen:
