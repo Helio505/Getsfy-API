@@ -92,23 +92,72 @@ export async function updateTaskById(req: Request, res: Response) {
     return res
       .status(203)
       .send(
-        "A ObjectId passada no parametro, não é válida. Insira uma Mongodb ObjectId válida."
+        "A ObjectId passada no parâmetro não é válida. Insira uma ObjectId válida do MongoDB."
       );
   }
 
   // Validando a existência:
   const taskById = await Task.findById(_id).lean();
   if (!taskById) {
-    return res.status(203).send("Não existe task com esse ID no BD.");
+    return res
+      .status(203)
+      .send("Não existe uma tarefa com esse ID no banco de dados.");
   }
 
-  // Operação no BD:
+  // Verificando parâmetros no corpo da requisição:
+  const {
+    createdAt,
+    name,
+    description,
+    creatorId,
+    workspaceId,
+    priority,
+    status,
+    dueDate,
+    assignee,
+    tags,
+  } = req.body;
+
+  // Atualizando apenas os campos fornecidos no corpo da requisição:
+  const updateData: any = {};
+  if (createdAt) {
+    updateData.createdAt = createdAt;
+  }
+  if (name) {
+    updateData.name = name;
+  }
+  if (description) {
+    updateData.description = description;
+  }
+  if (creatorId) {
+    updateData.creatorId = creatorId;
+  }
+  if (workspaceId) {
+    updateData.workspaceId = workspaceId;
+  }
+  if (priority) {
+    updateData.priority = priority;
+  }
+  if (status) {
+    updateData.status = status;
+  }
+  if (dueDate) {
+    updateData.dueDate = dueDate;
+  }
+  if (assignee) {
+    updateData.assignee = assignee;
+  }
+  if (tags) {
+    updateData.tags = tags;
+  }
+
+  // Operação no banco de dados:
   try {
-    await Task.findByIdAndUpdate(_id, req.body);
-    return res.status(200).send("Task modificada com sucesso.");
+    const task = await Task.findByIdAndUpdate(_id, updateData).lean();
+    return res.status(200).json(task);
   } catch (e) {
     console.error(e);
-    return res.status(203).send("Não foi possivel modificar.");
+    return res.status(203).send("Não foi possível modificar a tarefa.");
   }
 }
 

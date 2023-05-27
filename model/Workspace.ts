@@ -15,15 +15,16 @@ const workspaceSchema = new mongoose.Schema(
     },
     memberIds: [
       {
-        type: mongoose.Types.ObjectId,
+        type: String,
         ref: "g-User", // Substitua pelo nome do modelo de usuário, se necessário
       },
     ],
     pendingInvitations: [
       {
+        _id: String,
         userId: {
           required: true,
-          type: mongoose.Types.ObjectId,
+          type: String,
           ref: "g-User", // Substitua pelo nome do modelo de usuário, se necessário
         },
         invitationStatus: {
