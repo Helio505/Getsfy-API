@@ -4,7 +4,7 @@ import Task from "../model/Task";
 import mongoose from "mongoose";
 
 export async function createTask(req: any, res: Response) {
-  const { description, priority, workspaceId } = req.body;
+  const { description, priority, workspaceId, dueDate } = req.body;
 
   const userId = req.userId;
 
@@ -26,6 +26,7 @@ export async function createTask(req: any, res: Response) {
     status: "To Do",
     workspaceId,
     creatorId: userId,
+    dueDate,
   });
 
   await task.save();
