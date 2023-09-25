@@ -1,9 +1,10 @@
 import "dotenv/config";
 import express from "express";
 import { Request, Response } from "express";
-import User from "../model/User";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
+
+import User from "../model/User";
 
 const JWT_SECRET = String(process.env.JWT_SECRET);
 

@@ -11,7 +11,7 @@ const workspaceSchema = new mongoose.Schema(
     },
     creatorId: {
       type: mongoose.Types.ObjectId,
-      required: true
+      required: true,
     },
     memberIds: [
       {

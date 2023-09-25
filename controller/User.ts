@@ -1,7 +1,8 @@
 import express from "express";
 import { Request, Response } from "express";
-import User from "../model/User";
 import mongoose from "mongoose";
+
+import User from "../model/User";
 
 export async function getUsersByRole(req: Request, res: Response) {
   const role = req.params.role;

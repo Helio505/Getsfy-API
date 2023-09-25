@@ -1,7 +1,8 @@
 import express from "express";
 import { Request, Response } from "express";
-import Subtask from "../model/Subtask";
 import mongoose from "mongoose";
+
+import Subtask from "../model/Subtask";
 
 export async function createSubtask(req: Request, res: Response) {
   const { description, id, status, taskIdBelongsTo } = req.body;
@@ -21,7 +22,9 @@ export async function createSubtask(req: Request, res: Response) {
   // Validando id:
   const isIdValid = mongoose.Types.ObjectId.isValid(taskIdBelongsTo);
   if (!isIdValid) {
-    return res.status(203).send("Invalid mongodb objectid in 'taskIdBelongsTo'.");
+    return res
+      .status(203)
+      .send("Invalid mongodb objectid in 'taskIdBelongsTo'.");
   }
 
   const subtask = await new Subtask({

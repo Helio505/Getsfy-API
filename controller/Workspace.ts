@@ -1,8 +1,9 @@
 import express from "express";
 import { Request, Response } from "express";
+import mongoose from "mongoose";
+
 import Workspace from "../model/Workspace";
 import User from "../model/User";
-import mongoose from "mongoose";
 import Task from "../model/Task";
 
 export async function createWorkspace(req: any, res: Response) {

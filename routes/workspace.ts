@@ -12,7 +12,7 @@ import {
   addMemberToWorkspace,
   getPendingInvitations,
   acceptInvitationAndAddMember,
-  declineInvitation
+  declineInvitation,
 } from "../controller/Workspace";
 
 router.post("/", createWorkspace);

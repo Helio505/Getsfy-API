@@ -10,7 +10,6 @@ export const checkAuthMiddleware = async (
 ) => {
   const { authorization } = request.headers;
 
-
   if (!authorization) {
     return response.status(401).json({
       error: true,

@@ -1,7 +1,8 @@
 import express from "express";
 import { Request, Response } from "express";
-import Task from "../model/Task";
 import mongoose from "mongoose";
+
+import Task from "../model/Task";
 
 export async function createTask(req: any, res: Response) {
   const { description, priority, workspaceId, dueDate } = req.body;
